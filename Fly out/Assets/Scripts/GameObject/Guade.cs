@@ -1,53 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
-using ToxicFamilyGames.YandexSDK;
 using UnityEngine;
 
 public class Guade : MonoBehaviour
 {
-    [SerializeField] private GameObject mobileGuadeCar;
-    [SerializeField] private GameObject mobileGuadeCharacter;
-    [SerializeField] private GameObject pcGuadeCharacter;
-    [SerializeField] private GameObject pcGuadeCar;
-    private GameObject _guadeCar;
-    private GameObject _guadeCharacter;
-
-    private void Start()
-    {
-        if (AuthorizationYandex.IsMobile()) 
-        {
-            _guadeCar = mobileGuadeCar;
-            _guadeCharacter = mobileGuadeCharacter;
-        }
-        else
-        {
-            _guadeCar = pcGuadeCar;
-            _guadeCharacter = pcGuadeCharacter;
-        }
-    }
+    [SerializeField] private GameObject guadeCar;
+    [SerializeField] private GameObject guadeCharacter;
 
     public void StartGuadeCar()
     {
         if (PlayerPrefs.GetInt("guadeCar", 0) == 1) return;
-        _guadeCar.SetActive(true);
+        guadeCar.SetActive(true);
     }
 
     public void StartGuadeCharacter()
     {
         if (PlayerPrefs.GetInt("guadeCharacter", 0) == 1) return;
-        _guadeCharacter.SetActive(true);
+        guadeCharacter.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void StopGuadeCar()
     {
-        _guadeCar.SetActive(false);   
+        guadeCar.SetActive(false);   
         PlayerPrefs.SetInt("guadeCar", 1);
     }
 
     public void StopGuadeCharacter()
     {
-        _guadeCharacter.SetActive(false);
+        guadeCharacter.SetActive(false);
         PlayerPrefs.SetInt("guadeCharacter", 1);
         Time.timeScale = 1;
     }
