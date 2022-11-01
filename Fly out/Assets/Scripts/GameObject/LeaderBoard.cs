@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using ToxicFamilyGames.MenuEditor;
 using System.Text;
 using UnityEngine.Events;
 
@@ -14,17 +13,14 @@ public class LeaderBoard : MonoBehaviour
     [SerializeField] private int maxScoreRound;
     [SerializeField] private int minScoreRound;
     private string[] _namesGamersOfLanguage;
-    private string _namePlayerOfLanguage;
+    private string _namePlayerOfLanguage = "you";
     private Gamers[] _gamers;
-    private LanguageController _languageController;
     private Money _money;
 
     private void Start()
     {
-        _languageController = FindObjectOfType<LanguageController>();
         _money = FindObjectOfType<Money>();
-        _namePlayerOfLanguage = GetNamePlayer(_languageController.SelectedLanguage);
-        _namesGamersOfLanguage = GetGamersNamesOfLanguage(_languageController.SelectedLanguage);
+        _namesGamersOfLanguage = GetGamersNamesOfLanguage("en");
         _gamers = new Gamers[namesGamersTable.Length];
     }
 
@@ -80,21 +76,6 @@ public class LeaderBoard : MonoBehaviour
             gamers[i] = temp;
         }
         return gamers;
-    }
-
-    private string GetNamePlayer(string language)
-    {
-        switch (language)
-        {
-            case "ru":
-                return "Вы";
-            case "en":
-                return "You";
-            case "tr":
-                return "Sen";
-            default:
-                return "You";
-        }
     }
 
     private string[] GetGamersNamesOfLanguage(string language)
